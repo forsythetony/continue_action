@@ -1,0 +1,47 @@
+name: 'Continue'
+description: 'Sync markdown files with frontmatter to Confluence pages'
+author: 'Continue Action Team'
+inputs:
+  confluence-token:
+    description: 'API token for Confluence authentication'
+    required: true
+  confluence-url:
+    description: 'The base URL for your Confluence instance'
+    required: false
+    default: 'https://confluence.atlassian.com'
+  files-path:
+    description: 'Glob pattern for markdown files with frontmatter to process'
+    required: false
+    default: './**/*.md'
+  default-space-key:
+    description: 'Default Confluence space key if not specified in frontmatter'
+    required: false
+  create-missing:
+    description: 'Create pages in Confluence if they don't exist'
+    required: false
+    default: 'true'
+  update-existing:
+    description: 'Update existing pages in Confluence'
+    required: false
+    default: 'true'
+  frontmatter-delimiter:
+    description: 'The delimiter used in frontmatter (yaml, toml, etc.)'
+    required: false
+    default: '---'
+outputs:
+  success:
+    description: 'Boolean indicating if all operations were successful'
+  pages_created:
+    description: 'Number of new pages created in Confluence'
+  pages_updated:
+    description: 'Number of existing pages updated in Confluence'
+  pages_skipped:
+    description: 'Number of pages skipped (no changes or errors)'
+  summary:
+    description: 'Summary of actions taken for each processed file'
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
+branding:
+  icon: 'book'
+  color: 'blue'
